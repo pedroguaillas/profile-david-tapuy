@@ -1,0 +1,88 @@
+---
+const images = [
+  {
+    src: 'https://mir-s3-cdn-cf.behance.net/projects/808/b1e95b245383323.Y3JvcCwzMzc2LDI2NDAsMCw5ODY.jpg',
+    alt: 'Nacionalidad Shuar — Identidad y territorio',
+    category: 'Documental',
+    gridClass: 'md:col-start-1 md:col-end-7 md:row-start-1 md:row-end-3',
+  },
+  {
+    src: 'https://mir-s3-cdn-cf.behance.net/projects/808/105660160763715.Y3JvcCwyNjI0LDIwNTIsMCwyNDA.jpg',
+    alt: 'Retrato elegante en estudio',
+    category: 'Retrato',
+    gridClass: 'md:col-start-7 md:col-end-10 md:row-start-1 md:row-end-2',
+  },
+  {
+    src: 'https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/ff8fba160763715.63ba41987b1ba.jpg',
+    alt: 'Retrato elegante — Estudio editorial',
+    category: 'Retrato',
+    gridClass: 'md:col-start-10 md:col-end-13 md:row-start-1 md:row-end-2',
+  },
+  {
+    src: 'https://mir-s3-cdn-cf.behance.net/projects/808/84c9f972874257.Y3JvcCw0MTcyLDMyNjQsMzgyLDA.jpg',
+    alt: 'Foto Musik — Retrato artístico',
+    category: 'Arte',
+    gridClass: 'md:col-start-7 md:col-end-13 md:row-start-2 md:row-end-3',
+  },
+  {
+    src: 'https://mir-s3-cdn-cf.behance.net/projects/808/e56479139621063.Y3JvcCw1MTM0LDQwMTYsMzA1LDA.jpg',
+    alt: 'Fotografía Madre e hija — Vínculo eterno',
+    category: 'Familia',
+    gridClass: 'md:col-start-1 md:col-end-5 md:row-start-3 md:row-end-4',
+  },
+  {
+    src: 'https://mir-s3-cdn-cf.behance.net/projects/808/b59665139364855.Y3JvcCwyMjI1LDE3NDAsODg2LDkyNQ.jpg',
+    alt: 'Nacionalidades Pastaza — Cultura amazónica',
+    category: 'Documental',
+    gridClass: 'md:col-start-5 md:col-end-13 md:row-start-3 md:row-end-4',
+  },
+];
+---
+
+<section id="work" class="bg-white py-24 md:py-36">
+  <div class="px-8 md:px-16">
+
+    <!-- Section header -->
+    <div class="mb-14 flex items-end justify-between">
+      <div>
+        <p class="text-[9px] tracking-[0.45em] text-black/35 uppercase mb-4 font-light">Portafolio</p>
+        <h2 class="font-display font-light leading-[0.88]">
+          <span class="block text-[clamp(2.8rem,5.5vw,5.5rem)]">Trabajo</span>
+          <span class="block text-[clamp(2.8rem,5.5vw,5.5rem)] italic text-black/40">Selecto</span>
+        </h2>
+      </div>
+      <a
+        href="https://www.behance.net/eldavidos"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hidden md:flex items-center gap-3 text-[9px] tracking-[0.3em] text-black/40 uppercase hover:text-black transition-colors duration-300 font-light group"
+      >
+        <span>Ver en Behance</span>
+        <div class="h-px w-8 bg-black/20 group-hover:w-14 group-hover:bg-black transition-all duration-500"></div>
+      </a>
+    </div>
+
+    <!-- Editorial asymmetric grid -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-1 portfolio-grid">
+      {images.map((image) => (
+        <div class={`group relative overflow-hidden bg-neutral-100 ${image.gridClass}`}>
+          <img
+            src={image.src}
+            alt={image.alt}
+            class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+            loading="lazy"
+            decoding="async"
+          />
+          <!-- Hover overlay -->
+          <div class="absolute inset-0 bg-black/0 transition-all duration-500 group-hover:bg-black/50">
+            <div class="absolute bottom-0 left-0 right-0 translate-y-3 p-6 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+              <p class="text-[8px] tracking-[0.45em] text-white/60 uppercase mb-2 font-light">{image.category}</p>
+              <p class="font-display text-lg text-white font-light italic leading-tight">{image.alt}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

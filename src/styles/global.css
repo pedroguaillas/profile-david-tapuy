@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --color-off-white: #F9F9F9;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-weight: 300;
+  background-color: #ffffff;
+  color: #000000;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: #000;
+  color: #fff;
+}
+
+::-webkit-scrollbar {
+  width: 2px;
+}
+::-webkit-scrollbar-track {
+  background: #f9f9f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #000;
+}
+
+.portfolio-grid {
+  grid-auto-rows: 65vw;
+}
+
+@media (min-width: 768px) {
+  .portfolio-grid {
+    grid-auto-rows: 300px;
+  }
+}
