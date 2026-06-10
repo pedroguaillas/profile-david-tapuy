@@ -304,7 +304,7 @@ const slides = [
             if (mainNav) {
                 mainNav.style.background = `rgba(0, 0, 0, ${opacity})`;
                 mainNav.style.backdropFilter = ratio > 0.05 ? `blur(${blur}px)` : "none";
-                (mainNav.style as any).webkitBackdropFilter = ratio > 0.05 ? `blur(${blur}px)` : "none";
+                mainNav.style.webkitBackdropFilter = ratio > 0.05 ? `blur(${blur}px)` : "none";
             }
             if (window.scrollY > 60) {
                 mainNav?.classList.add("is-scrolled");
