@@ -21,7 +21,7 @@ const slides = [
 ];
 ---
 
-<section id="home" class="relative h-screen w-full overflow-hidden bg-black">
+<section id="home" tabindex="-1" class="relative h-screen w-full overflow-hidden bg-black">
     <!-- Carousel slides (stacked, crossfade) -->
     <div class="absolute inset-0">
         {
@@ -70,6 +70,8 @@ const slides = [
         <button
             id="menuBtn"
             aria-label="Abrir menú"
+            aria-expanded="false"
+            aria-controls="mobileMenu"
             class="md:hidden text-white/60 hover:text-white transition-colors duration-300"
         >
             <svg
@@ -86,7 +88,7 @@ const slides = [
     </nav>
 
     <!-- Mobile menu overlay -->
-    <div id="mobileMenu" class="fixed inset-0 z-50 hidden flex-col items-center justify-center bg-black/96">
+    <div id="mobileMenu" role="dialog" aria-modal="true" aria-label="Menú de navegación" aria-hidden="true" class="fixed inset-0 z-50 hidden flex-col items-center justify-center bg-black/96">
         <button
             id="closeMenu"
             aria-label="Cerrar menú"
@@ -144,7 +146,7 @@ const slides = [
     </div>
 
     <!-- Dot navigation -->
-    <div class="absolute bottom-10 left-1/2 z-30 flex -translate-x-1/2 items-center gap-2">
+    <div role="tablist" aria-label="Diapositivas" class="absolute bottom-10 left-1/2 z-30 flex -translate-x-1/2 items-center gap-2">
         {
             slides.map((_, i) => (
                 <button
@@ -157,7 +159,7 @@ const slides = [
     </div>
 
     <!-- Scroll indicator -->
-    <div class="absolute bottom-10 right-8 z-30 flex items-center gap-3 md:right-16">
+    <div class="absolute bottom-10 right-8 z-30 flex items-center gap-3 md:right-16" aria-hidden="true">
         <span class="text-[8px] tracking-[0.45em] text-white/30 uppercase font-light">Scroll</span>
         <div class="h-px w-10 bg-white/15"></div>
     </div>
@@ -184,6 +186,18 @@ const slides = [
         }
         to {
             transform: scale(1);
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .carousel-slide {
+            transition: none;
+        }
+        .carousel-slide.is-active .carousel-img {
+            animation: none;
+        }
+        #hero-text {
+            transition: none;
         }
     }
 
@@ -321,16 +335,48 @@ const slides = [
     const mobileMenu = document.getElementById("mobileMenu");
     const mobileLinks = document.querySelectorAll(".mobile-link");
 
-    menuBtn?.addEventListener("click", () => {
+    function openMobileMenu() {
         mobileMenu?.classList.remove("hidden");
         mobileMenu?.classList.add("flex");
-    });
+        mobileMenu?.setAttribute("aria-hidden", "false");
+        menuBtn?.setAttribute("aria-expanded", "true");
+        const firstLink = mobileMenu?.querySelector("a, button");
+        firstLink?.focus();
+    }
 
     function closeMobileMenu() {
         mobileMenu?.classList.add("hidden");
         mobileMenu?.classList.remove("flex");
+        mobileMenu?.setAttribute("aria-hidden", "true");
+        menuBtn?.setAttribute("aria-expanded", "false");
+        menuBtn?.focus();
     }
 
+    menuBtn?.addEventListener("click", openMobileMenu);
     closeMenu?.addEventListener("click", closeMobileMenu);
     mobileLinks.forEach((l) => l.addEventListener("click", closeMobileMenu));
+
+    // Escape key closes menu
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && mobileMenu?.getAttribute("aria-hidden") === "false") {
+            closeMobileMenu();
+        }
+    });
+
+    // Focus trap inside mobile menu
+    mobileMenu?.addEventListener("keydown", (e) => {
+        if (e.key !== "Tab") return;
+        const focusable = Array.from(
+            mobileMenu.querySelectorAll("a[href], button:not([disabled])")
+        );
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault();
+            last?.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault();
+            first?.focus();
+        }
+    });
 </script>
