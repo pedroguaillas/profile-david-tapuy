@@ -1,6 +1,10 @@
 ---
 import { ClientRouter } from 'astro:transitions';
+import { getImage } from 'astro:assets';
 import '../styles/global.css';
+import aboutImg from '../assets/about.jpg';
+
+const ogImg = await getImage({ src: aboutImg, width: 1200, height: 630, format: 'jpeg' });
 
 interface Props {
   title?: string;
@@ -11,7 +15,7 @@ interface Props {
 const {
   title = 'David Tapuy — Fotografía de Autor',
   description = 'Portafolio de David Tapuy, fotógrafo especializado en retratos cinematográficos, fotografía editorial y narrativa visual.',
-  image = '/favicon.svg',
+  image = Astro.url.origin + ogImg.src,
 } = Astro.props;
 ---
 

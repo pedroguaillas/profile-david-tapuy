@@ -3,8 +3,12 @@ import { defineConfig } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
 
-// https://astro.build/config
+const site = process.env.VERCEL_URL
+  ? `https://${process.env.VERCEL_URL}`
+  : 'http://localhost:4321';
+
 export default defineConfig({
+  site,
   vite: {
     plugins: [tailwindcss()]
   }

@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import logo from '../assets/logo.png';
+
 const slides = [
     {
         src: "https://mir-s3-cdn-cf.behance.net/projects/808/105660160763715.Y3JvcCwyNjI0LDIwNTIsMCwyNDA.jpg",
@@ -44,9 +47,11 @@ const slides = [
     <!-- Navigation -->
     <nav
         id="main-nav"
-        class="fixed left-0 right-0 top-0 z-30 flex items-center justify-between px-8 py-10 md:px-16 md:py-12"
+        class="fixed left-0 right-0 top-0 z-30 flex items-center justify-between px-10 py-12 md:px-16 md:py-14"
     >
-        <a href="/" class="font-display text-base tracking-[0.45em] text-white uppercase font-light"> David Tapuy </a>
+        <a href="/" class="block">
+            <Image src={logo} alt="David Tapuy Estudio Creativo" width={120} class="h-8 w-auto" style="filter: brightness(0) invert(1);" />
+        </a>
         <ul class="hidden items-center gap-10 md:flex">
             <li>
                 <a

@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import logo from '../assets/logo.png';
+
 const igImages = [
   {
     src: 'https://mir-s3-cdn-cf.behance.net/projects/808/9f0124117126749.Y3JvcCwxNzIzLDEzNDcsMCw2MjY.jpg',
@@ -143,7 +146,10 @@ const bhImages = [
   <!-- Bottom bar -->
   <div class="border-t border-white/10 px-8 py-6 md:px-16">
     <div class="flex items-center justify-between text-[8px] tracking-[0.35em] text-white/40 uppercase font-light">
-      <span>© 2024 David Tapuy</span>
+      <div class="flex items-center gap-3">
+        <Image src={logo} alt="David Tapuy Estudio Creativo" width={80} class="h-5 w-auto" style="filter: brightness(0) invert(1);" />
+        <span>© 2024</span>
+      </div>
       <span>Fotografía de Autor — Ecuador</span>
     </div>
   </div>

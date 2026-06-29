@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import aboutImg from '../assets/about.jpg';
 ---
 
 <section id="about" class="bg-off-white py-24 md:py-40">
@@ -46,17 +48,24 @@
       </div>
 
       <!-- Image — right on desktop -->
-      <div class="relative order-1 md:order-2">
-        <div class="aspect-[3/4] overflow-hidden bg-neutral-200">
-          <img
-            src="https://instagram.fgye10-1.fna.fbcdn.net/v/t51.82787-15/611595790_18415878208140608_4579930317576123217_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=108&ig_cache_key=MzgwNDUzNDcwMDI1MDA0NjQ3NQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTQ0MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=sLqym9UNZ1sQ7kNvwHWrKx7&_nc_oc=AdpzLgKkCagg0Q8SZB4nXcGPiSwd8ZGqHxqH4N6EtSvBN30WXG3N6PgiPQTUkXZwdNE&_nc_zt=23&_nc_ht=instagram.fgye10-1.fna&_nc_gid=O8Tc7hqgF0iPz7xj3QLoHQ&_nc_ss=7ba02&oh=00_Af-gxHVi_hZsl8j310jGFLZXKelICg9exeRu9KfIeWbySw&oe=6A35F41C"
+      <div class="relative order-1 md:order-2 flex justify-center">
+        <!-- Decorative rings -->
+        <div class="absolute inset-0 m-auto aspect-square w-[90%] rounded-full border border-[#C8811A]/20"></div>
+        <div class="absolute inset-0 m-auto aspect-square w-[105%] rounded-full border border-[#C8811A]/10"></div>
+
+        <!-- Photo -->
+        <div class="relative aspect-square w-[80%] overflow-hidden rounded-full"
+             style="box-shadow: 0 8px 40px rgba(200,129,26,0.18), 0 2px 12px rgba(0,0,0,0.10);">
+          <Image
+            src={aboutImg}
             alt="David Tapuy, fotógrafo"
-            class="h-full w-full object-cover"
+            class="h-full w-full object-cover object-top"
             loading="lazy"
-            decoding="async"
           />
+          <!-- Warm gradient overlay bottom -->
+          <div class="absolute inset-0 rounded-full"
+               style="background: radial-gradient(ellipse at bottom, rgba(200,129,26,0.12) 0%, transparent 65%);"></div>
         </div>
-        <div class="absolute -bottom-5 -left-5 h-28 w-28 border border-black/8"></div>
       </div>
 
     </div>
